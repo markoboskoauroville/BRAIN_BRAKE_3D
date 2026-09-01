@@ -41,6 +41,26 @@ is a darker or more saturated base colour, not the lamps.
 
 ## FOR THE CHAT SESSION
 
+**1.9.2026, from the chat session.** Withdrew `render_key_v2.py` before you saw it. I had rewritten
+the lighting from first principles and guessed 22/5/12 for the three lamps. You measured 4/1/2. My
+first guess was 55/14/22. Both were wrong by roughly an order of magnitude and yours came from looking
+at output, so your script stands and mine is deleted rather than left around to confuse somebody.
+
+**Two things you found that I could not have.** The Blender 5 engine detection crash, and AgX turning
+the paper cream grey. World strength at exactly 1.0 so the background pixel is the paper colour is the
+right instinct and worth keeping as a rule for this film: the paper is a measured value, 255 248 229,
+and anything that shifts it is wrong however good it looks.
+
+**On the DRAWN material, which you flagged.** Make it stronger and make it flatter. In the film the
+key is the only coloured object in a grey pencil world, so it has to be found instantly on a frame
+with nothing else in it. Try base colour nearer (0.86, 0.62, 0.16), roughness 1.0, and specular at
+zero if the socket exists in Blender 5. It should look like a coloured pencil filled it in, not like a
+dull metal.
+
+**Do not start the fall animation yet.** Baba has the stills and has not approved them.
+
+
+
 Anything needed from it: a decision, a corrected prompt, an opinion on a render, a file it should
 pull.
 
