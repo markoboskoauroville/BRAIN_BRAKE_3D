@@ -67,7 +67,9 @@ w = bpy.data.worlds.new('PAPER') if not bpy.data.worlds else bpy.data.worlds[0]
 bpy.context.scene.world = w
 w.use_nodes = True
 w.node_tree.nodes['Background'].inputs['Color'].default_value = PAPER
-w.node_tree.nodes['Background'].inputs['Strength'].default_value = 1.1
+# exactly 1.0 with the Standard view transform, so the background pixel IS the
+# paper colour rather than clipping to pure white
+w.node_tree.nodes['Background'].inputs['Strength'].default_value = 1.0
 
 # ----------------------------------------------------------------- lights
 def light(name, kind, loc, energy, size=0.35):
@@ -81,9 +83,9 @@ def light(name, kind, loc, energy, size=0.35):
     o.rotation_euler = (mathutils.Vector((0,0,0)) - mathutils.Vector(loc)).to_track_quat('-Z','Y').to_euler()
     return o
 
-light('KEY_LIGHT',  'AREA', ( 0.22,  -0.18,  0.26), 55)
-light('FILL_LIGHT', 'AREA', (-0.26,  -0.14,  0.06), 14)
-light('RIM_LIGHT',  'AREA', ( 0.02,   0.28,  0.14), 22)
+light('KEY_LIGHT',  'AREA', ( 0.22,  -0.18,  0.26), 4)
+light('FILL_LIGHT', 'AREA', (-0.26,  -0.14,  0.06), 1)
+light('RIM_LIGHT',  'AREA', ( 0.02,   0.28,  0.14), 2)
 
 # ----------------------------------------------------------------- camera
 cam_data = bpy.data.cameras.new('CAM')
@@ -101,10 +103,21 @@ t.up_axis = 'UP_Y'
 
 # ----------------------------------------------------------------- render
 sc = bpy.context.scene
-sc.render.engine = 'BLENDER_EEVEE_NEXT' if 'BLENDER_EEVEE_NEXT' in \
-    [e.bl_idname for e in bpy.types.RenderEngine.__subclasses__()] else 'BLENDER_EEVEE'
+for engine in ('BLENDER_EEVEE_NEXT', 'BLENDER_EEVEE', 'CYCLES'):
+    try:
+        sc.render.engine = engine
+        break
+    except TypeError:
+        continue
+print('render engine: %s' % sc.render.engine)
 try:
     sc.eevee.use_raytracing = True
+except Exception:
+    pass
+# Standard view transform, not AgX: AgX turns the paper cream grey and washes
+# the brass toward white. The site needs the film's actual paper colour.
+try:
+    sc.view_settings.view_transform = 'Standard'
 except Exception:
     pass
 sc.render.resolution_x = 2752
