@@ -17,16 +17,30 @@ down, and so is any guess you had to make because a step did not cover something
 
 Rewritten each time. What is done, what is running, what is blocked and on what.
 
-*STEP 82 done. STEP 81 stills done twice: v1 (EEVEE, Standard transform) and v2
-(`render_key_v2.py`, Cycles, studio dome, bevel). The best three of each v2 material are in
-`stills/` as 1600 wide JPEGs. Verdict on v2 below: better geometry, wrong colour. Still blocked on
-Baba approving a look before the fall animation starts.*
+*v3 approved look achieved and its six stills are in `stills/` as `*_v3.jpg`. The fall render is
+running on the Mac: 162 frames, 25 fps, Cycles, transparent background, into `renders/FALL/`,
+not committed. Report on it follows when the frames are checked.*
 
 ---
 
 ## LOG
 
 Newest at the top. Dated. What you did, what came out, what you are unsure about.
+
+**1.9.2026, the 3D session, third entry: v3 is the look.** `render_key_v3.py` is v2's studio
+through the Standard transform, and it took three passes to balance. Two things beyond the plan,
+both measured. First, the PAPER constant was display sRGB fed to Blender as linear, so the
+background rendered 255,252,243; it is now converted properly, (1.0, 0.9387, 0.7836) linear, and
+the background pixel is 255,248,229 exactly. Second, the v2 card energies of 140/32/70 were sized
+for AgX's compression and blew everything white through Standard; they are now 3/0.75/1.5, the
+same order-of-magnitude correction as every lighting guess so far. Result: the brass is genuinely
+gold with the long soft shaft highlight kept, the clover reads, and the DRAWN key at
+(0.86, 0.66, 0.22), roughness 1, specular 0, is a solid flat matte gold shape against the cream,
+found instantly, nothing clipped. Six stills in `stills/` as `*_v3.jpg`, 1600 wide. The fall
+started from this look: `scripts/render_fall.py`, 162 frames at 25 fps, transparent background so
+the film's places composite behind it, the key approaching the camera at constant speed so the
+section 28 stage sizes fall out of perspective itself, two and a half slow turns, Mix Shader
+crossfade from pencil to brass across the whole descent.
 
 **1.9.2026, the 3D session, second entry: `render_key_v2.py` run and judged.** Twelve Cycles
 frames rendered clean, about eight minutes, no crashes. What v2 genuinely improved: the bevel
