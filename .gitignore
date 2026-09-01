@@ -1,0 +1,7 @@
+# Output lives in renders/ and is never committed. It regenerates from scripts/.
+renders/
+*.blend1
+__pycache__/
+.DS_Store
+# Nothing over 50 MB goes in this repository. If a file is that big it is an
+# export, and exports go to the Exchange folder on Drive, not into git.
