@@ -147,7 +147,14 @@ key.keyframe_insert('rotation_euler', frame=1)
 key.rotation_euler = (math.radians(38), math.radians(25), math.radians(900))
 key.keyframe_insert('rotation_euler', frame=FRAMES)
 
-for fc in key.animation_data.action.fcurves:
+# Blender 5 actions are layered and the legacy Action.fcurves is gone
+act = key.animation_data.action
+try:
+    fcurves = list(act.fcurves)
+except AttributeError:
+    fcurves = [fc for layer in act.layers for strip in layer.strips
+               for cb in strip.channelbags for fc in cb.fcurves]
+for fc in fcurves:
     for kp in fc.keyframe_points:
         kp.interpolation = 'LINEAR'
 

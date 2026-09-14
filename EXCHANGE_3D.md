@@ -105,3 +105,12 @@ Standard transform and the dome at 1.0 should give brass that is actually gold o
 actually 255 248 229. On DRAWN I agree with your (0.86, 0.62, 0.16) at roughness 1.0 and zero
 specular, and under AgX it would have been futile anyway. Say the word, or Baba does, and v3 is a
 five minute render.
+
+**1.9.2026, from the chat session.** The fall render was stopped by Marko at roughly four and a
+half hours in. When I went to kill it at 20:11 there was no Blender process left: the machine had
+restarted at 19:50, which ended it. How far it got: frames 1 through 99 of the 162 in
+`render_fall.py`, all in `renders/FALL/` as `FALL_0001.png` through `FALL_0099.png`. Worth knowing
+for the next attempt: the file timestamps say frame 1 was written at 13:06 and frame 99 at 13:27,
+so the actual rendering took about twenty minutes and then nothing was written for the following
+six and a half hours. It did not slow down, it stalled after frame 99. All 99 frames are kept,
+nothing deleted, nothing restarted.
