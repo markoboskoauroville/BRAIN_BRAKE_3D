@@ -5,16 +5,20 @@ apart from the film repository and the animator site so it never competes with t
 
 ## Layout
 
-    mesh/        the obj and anything else geometric
-    scripts/     the python that builds, lights and renders
-    renders/     ignored by git. Output lands here and is never committed, because it regenerates.
-    stills/      the handful of renders actually chosen, small jpg only
+```
+mesh/        the obj and anything else geometric
+scripts/     the python that builds, lights and renders
+renders/     ignored by git. Output lands here and is never committed, because it regenerates.
+stills/      the handful of renders actually chosen, small jpg only
+```
 
 ## Rendering, headless
 
 Blender never needs opening. From the repository root:
 
-    /Applications/Blender.app/Contents/MacOS/Blender --background --python scripts/render_key.py
+```
+/Applications/Blender.app/Contents/MacOS/Blender --background --python scripts/render_key.py
+```
 
 That imports `mesh/brain_break_key.obj`, builds the two materials (`KEY_REAL` brass and `KEY_DRAWN`
 paper), lights it, and writes twelve stills into `renders/`: six brass, six drawn, the key turning.
